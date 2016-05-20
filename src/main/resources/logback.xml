@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration debug="true" scan="true">
+	<jmxConfigurator />
+
+    <property name="LOG_PATH" value="log/" />
+    <property name="DEFAULT_PATTERN" value="[%-5level] [%date{ISO8601}] [%class{50}->%method] [%file:%line] | %msg%n" />
+    <property name="EXCEPTION_PATTERN" value="[%-5level] [%date{ISO8601}] [%class{50}->%method] [%file:%line] | %xEx%n" />
+    <property name="DEFAULT_MAX_FILE_SIZE" value="100MB" />
+    <property name="DEFAULT_MAX_HISTORY" value="45" />
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <!-- encoders are by default assigned the type ch.qos.logback.classic.encoder.PatternLayoutEncoder -->
+        <encoder>
+            <pattern>${DEFAULT_PATTERN}</pattern>
+        </encoder>
+    </appender>
+
+
+    <root level="debug">
+        <appender-ref ref="STDOUT" />
+    </root>
+
+</configuration>
