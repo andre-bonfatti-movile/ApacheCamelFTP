@@ -65,7 +65,7 @@ oi.ftp.optout.file.in.pattern=BASE_OPTOUT_*.txt
         fromUriOptout.append("&startingDirectoryMustExist=true");
         fromUriOptout.append("&noop=false");
         fromUriOptout.append("&readLock=rename");
-        fromUriOptout.append("&antInclude=").append("**/upload/*.txt");
+        fromUriOptout.append("&antInclude=").append("**/upload/*.ready");
         fromUriOptout.append("&localWorkDirectory=").append("file://target/working");
         fromUriOptout.append("&move=").append(".done");
         fromUriOptout.append("&moveFailed=").append("${file:onlyname}-${date:now:yyyyMMdd-HHmmssSSS}.error");
@@ -75,8 +75,8 @@ oi.ftp.optout.file.in.pattern=BASE_OPTOUT_*.txt
         fromUriOptout.append("&delay=").append(TimeUnit.MILLISECONDS.convert(Long.valueOf(1L), TimeUnit.MINUTES));
 
         from(fromUriOptout.toString())
-                .log("file:  ${in.header.CamelFileName}")
-                .setHeader(Exchange.FILE_NAME,simple("myfile.txt")) 
+                .log("file: ${in.header.CamelFileName}")
+                .setHeader(Exchange.FILE_NAME,simple("${file:name}"))
                 .process(processFileName)
                 .to("file://target/input");
 
